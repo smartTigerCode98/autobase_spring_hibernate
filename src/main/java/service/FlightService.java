@@ -35,10 +35,8 @@ public class FlightService {
         return true;
     }
 
-    public String findFlightForDriver(int idDriver) throws JsonProcessingException {
-        FlightsEntity flightsEntity = flightRepository.findFlightsEntitiesByIdDriverAndStatusIsFalse(idDriver);
-        ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.writeValueAsString(flightsEntity);
+    public FlightsEntity findFlightForDriver(int idDriver) {
+        return flightRepository.findFlightsEntitiesByIdDriverAndStatusIsFalse(idDriver);
     }
 
     public FlightsEntity findFlightById(int id){

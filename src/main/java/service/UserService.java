@@ -12,14 +12,11 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public String getUserInfo(String email, String password) throws JsonProcessingException {
-        String userInfo = "";
+    public UsersEntity getUserInfo(String email, String password){
         UsersEntity usersEntity = userRepository.findByEmailAndPassword(email, password);
         if (usersEntity != null){
             usersEntity.setPassword("");
-            ObjectMapper objectMapper = new ObjectMapper();
-            userInfo = objectMapper.writeValueAsString(usersEntity);
         }
-        return userInfo;
+        return usersEntity;
     }
 }

@@ -7,13 +7,13 @@ import service.CarService;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/car")
 public class CarController {
     @Autowired
     private CarService carService;
 
+    @RequestMapping("/api/cars/{idCar}")
     @PutMapping
-    public void updateStatusCar(@RequestParam Map<String, String> requestParams){
-        carService.updateStatusCar(Integer.parseInt(requestParams.get("idCar")), Boolean.parseBoolean(requestParams.get("statusCar")));
+    public void updateStatusCar(@PathVariable("idCar") int idCar, @RequestParam Map<String, String> requestParams){
+        carService.updateStatusCar(idCar, Boolean.parseBoolean(requestParams.get("statusCar")));
     }
 }

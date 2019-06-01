@@ -1,6 +1,5 @@
 package controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import entity.FlightsEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,7 +15,7 @@ public class FlightController {
     @Autowired
     private FlightService flightService;
 
-    @RequestMapping("/api/flight")
+    @RequestMapping("/api/flights")
     @PostMapping
     public boolean createFlight(@RequestParam Map<String, String> requestParams){
        return flightService.createFlight(Integer.parseInt(requestParams.get("idOrder")),
@@ -24,18 +23,12 @@ public class FlightController {
     }
 
 
-    @RequestMapping(value = "/api/flight/{idDriver}", method = RequestMethod.GET)
-    public ResponseEntity<String> getFlightForDriver(@PathVariable("idDriver") int idDriver) {
-        try {
-            String flightInfo = flightService.findFlightForDriver(idDriver);
-            return new ResponseEntity<>(flightInfo, HttpStatus.OK);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-            return new ResponseEntity<>("", HttpStatus.NOT_FOUND);
-        }
+    @RequestMapping(value = "/api/flights/drivers/{idDriver}", method = RequestMethod.GET)
+    public ResponseEntity<FlightsEntity> getFlightForDriver(@PathVariable("idDriver") int idDriver) {
+            return new ResponseEntity<>(flightService.findFlightForDriver(idDriver), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/api/flight/{idFlight}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/api/flights/{idFlight}", method = RequestMethod.PUT)
     public void updateStatusFlight(@RequestParam Map<String, String> requestParams, @PathVariable("idFlight") int idFlight){
         flightService.updateStatusFlightAndStatusDriver(idFlight,
                 Integer.parseInt(requestParams.get("idDriver")),

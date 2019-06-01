@@ -1,7 +1,5 @@
 package controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import entity.UsersEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,7 +9,7 @@ import service.UserService;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/verifyUser")
+@RequestMapping("/api/users")
 
 public class UserController {
 
@@ -19,15 +17,8 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    public ResponseEntity<String> verifyUser(@RequestParam Map<String, String> requestParams) {
-        try {
-            String userInfo = userService.getUserInfo(requestParams.get("email"), requestParams.get("password"));
-            System.out.println(userInfo);
-            return new ResponseEntity<>(userInfo, HttpStatus.OK);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-            return new ResponseEntity<>("", HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<UsersEntity> verifyUser(@RequestParam Map<String, String> requestParams) {
+        return new ResponseEntity<>(userService.getUserInfo(requestParams.get("email"), requestParams.get("password")), HttpStatus.OK);
     }
 
 }

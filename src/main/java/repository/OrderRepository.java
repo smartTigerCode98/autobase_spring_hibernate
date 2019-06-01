@@ -3,11 +3,11 @@ package repository;
 import entity.OrdersEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface OrderRepository extends JpaRepository<OrdersEntity, Integer> {
 
-    ArrayList<OrdersEntity> findOrdersEntitiesByProcessedIsFalse();
+    List<OrdersEntity> findOrdersEntitiesByProcessedIsFalse();
     OrdersEntity findById(int id);
 
 }

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 public interface OrderRepository extends JpaRepository<OrdersEntity, Integer> {
 
-    public ArrayList<OrdersEntity> findOrdersEntitiesByProcessedIsFalse();
-    public OrdersEntity findById(int id);
+    ArrayList<OrdersEntity> findOrdersEntitiesByProcessedIsFalse();
+    OrdersEntity findById(int id);
+
 }

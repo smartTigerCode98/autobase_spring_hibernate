@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface FlightRepository extends JpaRepository<FlightsEntity, Integer>{
 
-    public FlightsEntity findFlightsEntitiesByIdDriverAndStatusIsFalse(int idDriver);
-    public FlightsEntity findFlightsEntitiesById(int idFlight);
+    FlightsEntity findFlightsEntitiesByIdDriverAndStatusIsFalse(int idDriver);
+    FlightsEntity findFlightsEntitiesById(int idFlight);
+
 }
